@@ -1,4 +1,5 @@
 <?php include "header.php"; ?>
+
     <section class="container-fluid">
       <div class="container mt-5 d-flex flex-column align-items-center">
         <h1 class="text-warning">List of lazzzy persons!</h1>
@@ -37,4 +38,5 @@
         </div>
       </div>
     </section>
+    
 <?php include "footer.php"; ?>
