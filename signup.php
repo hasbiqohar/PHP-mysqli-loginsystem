@@ -2,7 +2,7 @@
     <section class="container-fluid">
       <div class="container mt-5">
         <h1 class="text-center text-warning">Join with lazzzy code community!</h1>
-        <form class="mt-5 mx-auto signup-form" action="signup.inc.php" method="post">
+        <form class="mt-5 mx-auto signup-form" action="includes/signup.inc.php" method="post">
           <div class="form-group d-flex flex-column justify-content-center">
             <input class="form-control my-2" type="text" name="firstname" placeholder="First Name">
             <input class="form-control my-2" type="text" name="lastname" placeholder="Last Name">
