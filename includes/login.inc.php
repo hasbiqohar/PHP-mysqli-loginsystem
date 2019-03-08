@@ -33,8 +33,6 @@ if (isset($_POST['submit'])) {
         exit();
       } else {
 
-
-
         if ($row = mysqli_fetch_assoc($result)) {
 
           $passHash = password_verify($pass, $row['user_pass']);

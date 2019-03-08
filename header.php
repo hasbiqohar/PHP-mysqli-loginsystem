@@ -1,3 +1,9 @@
+<?php
+
+  session_start();
+
+?>
+
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
   <head>
@@ -28,12 +34,25 @@
                 <a class="nav-link" href="participants.php">Participants</a>
               </li>
             </ul>
-            <form class="form-inline my-2 my-lg-0" action="includes/login.inc.php" method="post">
-              <input class="form-control mr-sm-2" type="text" name="user" placeholder="Username/e-mail" aria-label="Username">
-              <input class="form-control mr-sm-2" type="password" name="pass" placeholder="Password" aria-label="Password">
-              <button class="btn btn-secondary my-2 my-sm-0" type="submit" name="submit">Log in</button>
-            </form>
-            <a class="btn btn-outline-light my-2 my-sm-0 ml-2" href="signup.php">Sign up</a>
+
+            <?php
+              if (isset($_SESSION['user_id'])) {
+                ?>
+                <form class="form-inline my-2 my-lg-0" action="includes/logout.inc.php" method="post">
+                  <button class="btn btn-secondary my-2 my-sm-0" type="submit" name="submit">Log out</button>
+                </form>
+                <?php
+              } else {
+                ?>
+                <form class="form-inline my-2 my-lg-0" action="includes/login.inc.php" method="post">
+                  <input class="form-control mr-sm-2" type="text" name="user" placeholder="Username/e-mail" aria-label="Username">
+                  <input class="form-control mr-sm-2" type="password" name="pass" placeholder="Password" aria-label="Password">
+                  <button class="btn btn-secondary my-2 my-sm-0" type="submit" name="submit">Log in</button>
+                </form>
+                <a class="btn btn-outline-light my-2 my-sm-0 ml-2" href="signup.php">Sign up</a>
+                <?php
+              }
+            ?>
           </div>
         </nav>
       </div>
