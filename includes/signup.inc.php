@@ -15,11 +15,12 @@ if (isset($_POST['submit'])) {
     exit();
   } else {
     if (!preg_match("/^([A-Z])([a-z])+$/", $firstName) || !preg_match("/^([A-Z])([a-z])+$/", $lastName)) {
-      header("Location: ../signup.php?signup=invalid-characters");
+      header("Location: ../signup.php?signup=invalid-char");
       exit();
     } else {
       if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-        header("Location: ../signup.php?signup=invalid-email");
+        header("Location: ../signup.php?signup=invalid-email&firstname=$firstName&lastname=$lastName");
+        // header("Location: ../signup.php?signup=invalid-email");
         exit();
       } else {
 
@@ -27,7 +28,7 @@ if (isset($_POST['submit'])) {
         $stmt = mysqli_stmt_init($conn);
 
         if (!mysqli_stmt_prepare($stmt, $sql)) {
-          header("Location: ../signup.php?sql=error3");
+          header("Location: ../signup.php?signup=sql-error");
           exit();
         } else {
 
@@ -38,7 +39,8 @@ if (isset($_POST['submit'])) {
           $resultCheck = mysqli_num_rows($result);
 
           if ($resultCheck > 0) {
-            header("Location: ../signup.php?signup=email-taken");
+            header("Location: ../signup.php?signup=email-taken&firstname=$firstName&lastname=$lastName");
+            // header("Location: ../signup.php?signup=email-taken");
             exit();
           } else {
 
@@ -46,7 +48,7 @@ if (isset($_POST['submit'])) {
             $stmt = mysqli_stmt_init($conn);
 
             if (!mysqli_stmt_prepare($stmt, $sql)) {
-              header("Location: ../signup.php?sql=error2");
+              header("Location: ../signup.php?signup=sql-error");
               exit();
             } else {
 
@@ -57,7 +59,8 @@ if (isset($_POST['submit'])) {
               $resultCheck = mysqli_num_rows($result);
 
               if ($resultCheck > 0) {
-                header("Location: ../signup.php?signup=username-taken");
+                header("Location: ../signup.php?signup=username-taken&firstname=$firstName&lastname=$lastName&email=$email");
+                // header("Location: ../signup.php?signup=username-taken");
                 exit();
               } else {
 
@@ -66,10 +69,12 @@ if (isset($_POST['submit'])) {
                   $passCnt = strlen($pass);
 
                   if ($passCnt<8) {
-                    header("Location: ../signup.php?password=weak$passCnt");
+                    header("Location: ../signup.php?signup=pass8&firstname=$firstName&lastname=$lastName&email=$email&user=$user");
+                    // header("Location: ../signup.php?password=weak$passCnt");
                     exit();
                   } else {
-                    header("Location: ../signup.php?password=characters$passCnt");
+                    header("Location: ../signup.php?signup=passchar&firstname=$firstName&lastname=$lastName&email=$email&user=$user");
+                    // header("Location: ../signup.php?signup=passchar$passCnt");
                     exit();
                   }
 
@@ -81,7 +86,7 @@ if (isset($_POST['submit'])) {
                   $stmt = mysqli_stmt_init($conn);
 
                   if (!mysqli_stmt_prepare($stmt, $sql)) {
-                    header("Location: ../signup.php?sql=error1");
+                    header("Location: ../signup.php?signup=sql-error");
                     exit();
                   } else {
 
