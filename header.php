@@ -37,7 +37,16 @@
 
             <?php
               if (isset($_SESSION['user_id'])) {
+
+                $user = $_SESSION['user_name'];
+
                 ?>
+                <h1 class="navbar-brand
+                <?php
+                  if ($user == "admin") {
+                    echo " text-info";
+                  }
+                ?>"><?php echo $user; ?></h1>
                 <form class="form-inline my-2 my-lg-0" action="includes/logout.inc.php" method="post">
                   <button class="btn btn-secondary my-2 my-sm-0" type="submit" name="submit">Log out</button>
                 </form>

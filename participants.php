@@ -13,6 +13,17 @@ include "includes/dbh.inc.php";
           <p class="w-25 float-left">Full name</p>
           <p class="w-30 float-left">Username</p>
           <p class="w-30 float-left">E-mail</p>
+          <div class="w-10 float-left">
+            <?php
+              if (isset($_SESSION['user_name'])) {
+                if (($_SESSION['user_name'] == "admin")) {
+                  ?>
+                    <p class="text-center">Delete</p>
+                  <?php
+                }
+              }
+            ?>
+          </div>
         </div>
 
         <?php
@@ -40,13 +51,36 @@ include "includes/dbh.inc.php";
                     <p class="w-25 float-left"><?php echo $row['user_firstname']; ?> <?php echo $row['user_lastname']; ?></p>
                     <p class="w-30 float-left"><?php echo $row['user_name']; ?></p>
                     <p class="w-30 float-left"><?php echo $row['user_email']; ?></p>
-                    <form class="w-10 float-left" action="includes/del.inc.php" method="post">
-                      <input type="hidden" name="user" value="<?php echo $row['user_name']?>">
-                      <button class="btn btn-light btn-delete" type="submit" name="submit"><i class="fas fa-window-close text-danger"></i></button>
-                    </form>
+                    <?php
+                      if (isset($_SESSION['user_name'])) {
+                        if (($_SESSION['user_name'] == "admin")) {
+                        ?>
+                          <form class="w-10 float-left" action="includes/del.inc.php" method="post">
+                            <input type="hidden" name="user" value="<?php echo $row['user_name']?>">
+                            <button class="btn btn-light btn-delete m-auto d-block" type="submit" name="submit"><i class="fas fa-window-close text-danger"></i></button>
+                          </form>
+                        <?php
+                        }
+                      }
+                   ?>
                   </div>
                 <?php
               }
+            }
+          }
+          $fullURL = "http://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
+
+          if (strpos($fullURL, "status=deleted")) {
+            if (isset($_GET['user'])) {
+              $userDeleted = $_GET['user'];
+              ?>
+                <div class="w-80 d-flex">
+                  <p class="mx-auto text-danger">
+                  <?php
+                    echo $userDeleted;
+                  ?> was deleted!</p>
+                </div>
+              <?php
             }
           }
         ?>
