@@ -85,11 +85,11 @@
           <?php
         } elseif (strpos($fullURL, "signup=pass8")) {
           ?>
-            <p class="text-danger text-center">Your password must at least 8 characters!</p>
+            <p class="text-danger text-center">Minimum 8 characters: Letters, numbers, and/or symbols!</p>
           <?php
         } elseif (strpos($fullURL, "signup=passchar")) {
           ?>
-            <p class="text-danger text-center">Your password must use characters of at least 1 capital letter, 1 letter, and 1 number!</p>
+            <p class="text-danger text-center">Minimum 8 characters: Letters, numbers, and/or symbols!</p>
           <?php
         }elseif (strpos($fullURL, "signup=success")) {
           ?>
